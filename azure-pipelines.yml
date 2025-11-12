@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- deployment: DeployToVM
+  displayName: Test deploy to VM
+  environment: VirtualMachine  
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - script: echo "deploy ejecutado" > deploy.txt
+          displayName: Create deploy file in VM
+
+        - script: dir
+          displayName: list files
